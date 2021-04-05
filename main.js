@@ -1,7 +1,9 @@
 const fs = require('fs')
 const readlineSync = require('readline-sync')
-const chalk = require('chalk')
+const { hangmanpics } = require('./hangman')
+//const chalk = require('chalk')
 
+console.log('Welcome in the HANGMAN-GAME !!!')
 
 const words = ['alyra', 'blockchain', 'developpeur', 'bitcoin']
 
@@ -37,9 +39,10 @@ const startGame = () => {
   let randomWord = getRandomWord(words);
   let hiddenWord = CreateHiddenWord(randomWord)
 
-  let tries = 8;
-
+  let tries = 7;
+  let p = 0
   while (tries > 1 && !(hiddenWord.join('') == randomWord)) {
+    console.log(hangmanpics[p])
     console.log('==============')
     console.log(`=> Tries: ${tries}`)
     console.log(randomWord)
@@ -50,7 +53,8 @@ const startGame = () => {
       console.log('Good! that letter is in the word!')
       hiddenWord = replaceletter(answer, randomWord, hiddenWord);
     } else {
-      tries--;
+      tries--
+      p++
       console.log('Nope! that letter is not in the word!')
     }
   }
